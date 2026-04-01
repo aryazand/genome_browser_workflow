@@ -1,8 +1,34 @@
-samplesheet: ".test/config/samples.tsv"
-
-get_genome:
-  ncbi_ftp: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_genomic.fna.gz
-
-simulate_reads:
-  read_length: 100
-  read_number: 10000
+ucsc_trackhub:
+  directory: "genome_browser/ucsc_trackhub/"
+  hub_name: "tb40_timeseries_in_hffs"
+  email: "arya-zandvakili@uiowa.edu"
+  short_label: "TB40 Short Label"
+  long_label: "TB40 Long Label"
+  group_name: "tb40_group_name"
+  group_label: "TB40 Group Label"
+  process_tsrs:
+    tsr_bed_to_bigBed: "" #bedToBigBed
+  process_genome_annotation:
+    path: "data/genome/KF297339.1.gff"
+    gff3_to_GenePred: "-rnaNameAttr=gene -allowMinimalGenes -processAllGeneChildren" #gff3ToGenePred
+    GenePred_to_bgpInput: "" #genePredToBigGenePred
+    bgpInput_to_bigGenePred: "-type=bed12+8 -tab" #bedToBigBed
+  process_fasta:
+    path: "data/genome/KF297339.1.fasta"
+    faToTwoBit: ""
+  process_bw:
+    directory: "data/bigwig/"
+    regex: "\\.bw$"
+    plus_color: "0,0,100"
+    minus_color: "255,0,0"
+  genomes:
+    tb40_bac4_gfp:
+      defaultPos: "tb40_bac4_gfp:1-200000"
+      organism: "Human Cytomegalovirus"
+      scientificName: "Human Herpesvirus 5 strain TB40E"
+      description: "HCMV TB40E"
+      htmlDocumentation: "HCMV TB40E"
+      annotation:
+        track_name: "TB40"
+        short_label: "HCMV TB40E"
+        long_label: "HCMV TB40E, clone Lisa"
