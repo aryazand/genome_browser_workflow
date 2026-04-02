@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0 (2026-04-02)
+
+
+### Features
+
+* give option to negative values on minus strand ([ee4a7ee](https://github.com/aryazand/genome_browser_workflow/commit/ee4a7ee504efc8f7d6598d3490b07f7e425695ef))
+
 ## [1.1.0](https://github.com/snakemake-workflows/snakemake-workflow-template/compare/v1.0.0...v1.1.0) (2025-07-29)
 
 
