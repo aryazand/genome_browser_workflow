@@ -89,18 +89,34 @@ for assembly_name, assembly_data in snakemake.config["ucsc_trackhub"]["genomes"]
 			bw_basename=os.path.basename(bw)
 			bw_name=os.path.splitext(bw_basename)[0]
 
-			bw_track = trackhub.Track(
-				name=bw_name,
-				tracktype="bigWig",
-				source=os.path.abspath(bw),
-				shortLabel=bw_name,
-				longLabel=bw_name,
-				visibility="full",
-				autoScale="on",
-				maxHeightPixels="100:50:8",
-				color=snakemake.config["ucsc_trackhub"]["process_bw"]["plus_color"],
-				altColor=snakemake.config["ucsc_trackhub"]["process_bw"]["minus_color"]
-			)
+
+			# Determine whether to negate values based on filename
+			if bw_basename.endswith(("rev.bw", "reverse.bw", "minus.bw")):
+				bw_track = trackhub.Track(
+					name=bw_name,
+					tracktype="bigWig",
+					source=os.path.abspath(bw),
+					shortLabel=bw_name,
+					longLabel=bw_name,
+					visibility="full",
+					autoScale="on",
+					negateValues=snakemake.config["ucsc_trackhub"]["process_bw"]["negateValues_for_minus_strand"],
+					maxHeightPixels="100:50:8",
+					color=snakemake.config["ucsc_trackhub"]["process_bw"]["minus_color"],
+				)
+			else:
+				bw_track = trackhub.Track(
+					name=bw_name,
+					tracktype="bigWig",
+					source=os.path.abspath(bw),
+					shortLabel=bw_name,
+					longLabel=bw_name,
+					visibility="full",
+					autoScale="on",
+					maxHeightPixels="100:50:8",
+					color=snakemake.config["ucsc_trackhub"]["process_bw"]["plus_color"],
+				)
+
 
 			trackdb.add_tracks(bw_track)
 

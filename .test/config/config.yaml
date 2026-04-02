@@ -20,6 +20,7 @@ ucsc_trackhub:
     directory: "data/bigwig/"
     regex: "\\.bw$"
     plus_color: "0,0,100"
+    negateValues_for_minus_strand: "on"
     minus_color: "255,0,0"
   genomes:
     tb40_bac4_gfp:
